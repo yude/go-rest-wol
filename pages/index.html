@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>GO-REST-WOL</title>
+    <title>Wake on LAN</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,69 +13,27 @@
     </style>
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12" role="main">
-          <h1><span class="fa fa-qq"></span> GO-REST-WOL <small>Your little Monster to Wakeup the lazy one</small></h1>
-            <div id="snackbar" class="alert hideMe">
-              Message comes here
-            </div>
+    <div class="container mx-auto mt-5">
+          <h1 style="text-align: center">Wake on LAN</h1>
+            <div id="snackbar" class="alert hideMe"></div>
             <table class="table">
                 <thead>
                   <tr>
                     <th></td>
-                    <th>Computer</th>
-                    <th>MAC Adress</th>
-                    <th>Broadcast IP Address</th>
-                    <th>API URL</th>
+                    <th>ホスト</th>
+                    <th>MACアドレス</th>
                   </tr>
                 </thead>
                 <tbody>
                   {{range .}}
                   <tr>
-                    <td class="align-middle"><b><button id="bn_{{.Name}}" name="wolbutton" value="{{.Name}}" class="btn btn-success btn-sm" onclick="$.wakeUpComputerByName('{{.Name}}')">WakeUp</button></b></td>
+                    <td class="align-middle"><b><button id="bn_{{.Name}}" name="wolbutton" value="{{.Name}}" class="btn btn-success btn-sm" onclick="$.wakeUpComputerByName('{{.Name}}')">起動</button></b></td>
                     <td class="align-middle">{{.Name}}</td>
                     <td class="align-middle">{{.Mac}}</td>
-                    <td class="align-middle">{{.BroadcastIPAddress}}</td>
-                    <td class="align-middle">/api/wakeup/computer/{{.Name}}</td>
                   </tr>
                   {{end}}
                 </tbody>
               </table>
-              <hr>
-              <p>
-                <h3>REST API Usage</h3>
-                <b>/api/wakeup/computer/<span class="text-info">&lt;ComputerName&gt;</span></b>
-
-                <b>Returns a JSON Object</b>
-                <p>
-                <pre>
-                  {
-                    "success":true,
-                    "message":"Succesfully Wakeup Computer Computer1 with Mac 64-07-2D-BB-BB-BF on Broadcast IP 192.168.10.254:9",
-                    "error":null
-                  }
-                </pre>
-                </p>
-                <dl class="dl-horizontal">
-                  <dt>success</dt>
-                  <dd>True or False if the WakeOnLan Paket was send</dd>
-                  <dt>message</dt>
-                  <dd>Message as string what happen</dd>
-                  <dt>error</dt>
-                  <dd>Encoded Jsonobject from GOLANG Error Object</dd>
-                </dl>
-
-              </p>
-              <hr>
-              <p>
-                <span class="fa fa-github"></span> Project Page: <a href="https://github.com/dabondi/go-rest-wol">https://github.com/dabondi/go-rest-wol</a>
-              </p>
-              <p>
-                  <small>Build with <span class="fa fa-heart text-danger" aria-hidden="true"></span> by David Baumann, <span class="fa fa-github"></span> <a href="https://github.com/dabondi">https://github.com/dabondi</a></small>
-              </p>
-        </div>
-      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -119,12 +77,7 @@
             }
           })
         };
-
-
       });
-
-
-
     </script>
   </body>
 </html>

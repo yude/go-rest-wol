@@ -14,7 +14,7 @@ func loadComputerList(computerCsvFilePath string) ([]Computer, error) {
 
 	computerCsvFilePointer, computerCsvFileOpenError := os.Open(computerCsvFilePath)
 	if computerCsvFileOpenError != nil {
-		log.Fatalf("Error on Opening the file")
+		log.Fatalf("Failed to open hosts.csv")
 		return computers, computerCsvFileOpenError
 	}
 

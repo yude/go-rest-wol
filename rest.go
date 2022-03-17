@@ -23,7 +23,7 @@ func restWakeUpWithComputerName(w http.ResponseWriter, r *http.Request) {
 
 	// Ensure computerName is not empty
 	if computerName == "" {
-		result.Message = "Empty Computername is not allowed"
+		result.Message = "ホスト名を指定してください。"
 		result.ErrorObject = nil
 		w.WriteHeader(http.StatusBadRequest)
 		// Computername is empty
@@ -38,12 +38,12 @@ func restWakeUpWithComputerName(w http.ResponseWriter, r *http.Request) {
 					// We got an internal Error on SendMagicPacket
 					w.WriteHeader(http.StatusInternalServerError)
 					result.Success = false
-					result.Message = "Internal error on Sending the Magic Packet"
+					result.Message = "マジックパケットを送る処理の途中でエラーが発生しました。"
 					result.ErrorObject = err
 				} else {
 					// Horray we send the WOL Packet succesfully
 					result.Success = true
-					result.Message = fmt.Sprintf("Succesfully Wakeup Computer %s with Mac %s on Broadcast IP %s", c.Name, c.Mac, c.BroadcastIPAddress)
+					result.Message = fmt.Sprintf("ホスト %s (MACアドレス: %s) を起動しました。", c.Name, c.Mac)
 					result.ErrorObject = nil
 				}
 			}
@@ -52,7 +52,7 @@ func restWakeUpWithComputerName(w http.ResponseWriter, r *http.Request) {
 		if result.Success == false && result.ErrorObject == nil {
 			// We could not find the Computername
 			w.WriteHeader(http.StatusNotFound)
-			result.Message = fmt.Sprintf("Computername %s could not be found", computerName)
+			result.Message = fmt.Sprintf("ホスト %s は登録されていません。", computerName)
 		}
 	}
 	json.NewEncoder(w).Encode(result)

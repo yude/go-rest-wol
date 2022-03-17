@@ -23,7 +23,7 @@ func main() {
 	// Loading Computer CSV File to Memory File in Memory
 	var loadComputerCSVFileError error
 	if ComputerList, loadComputerCSVFileError = loadComputerList(computerFilePath); loadComputerCSVFileError != nil {
-		log.Fatalf("Error on loading Computerlist File \"%s\" check File access and formating", computerFilePath)
+		log.Fatalf("Failed to load \"%s\". Please make sure there's no syntax or permission error.", computerFilePath)
 	}
 
 	// Init HTTP Router - mux
@@ -38,7 +38,7 @@ func main() {
 
 	// Setup Webserver
 	httpListen := fmt.Sprint(":", httpPort)
-	log.Printf("Startup Webserver on \"%s\"", httpListen)
+	log.Printf("Serving on \"%s\".", httpListen)
 
 	log.Fatal(http.ListenAndServe(httpListen, handlers.RecoveryHandler(handlers.PrintRecoveryStack(true))(router)))
 }
