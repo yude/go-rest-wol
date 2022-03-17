@@ -2,7 +2,7 @@
 Wake on LAN over the Internet via the computer on your LAN
 ## Setup
 1. Create `docker-compose.yml` and copy & paste the below:
-  ```
+  ```yaml
   version: '3'
   services:
     wol:
