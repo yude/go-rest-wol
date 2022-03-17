@@ -6,18 +6,12 @@ Wake on LAN over the Internet via the computer on your LAN
   version: '3'
   services:
     wol:
-      image: ghcr.io/yude/go-rest-wol
-      ports:
-        - "8080:8080"
+      image: ghcr.io/yude/go-rest-wol:master
+      network_mode: host
       volumes:
         - type: bind
           source: "./hosts.csv"
-          target: "/app1/hosts.csv"
-  
-  networks:
-    default:
-      external:
-        name: nat
+          target: "/app/hosts.csv"
   ```
 2. Create `hosts.csv` and copy & paste the below, and edit as you like.
   ```
